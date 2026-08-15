@@ -4,46 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Syntecxhub Quiz App</title>
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-  body { background: linear-gradient(135deg, #8b5cf6, #c4b5fd); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-.quiz-container { background: white; width: 100%; max-width: 600px; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-.header { text-align: center; margin-bottom: 20px; }
-.header h1 { color: #5b21b6; font-size: 28px; }
-.header p { color: #6b7280; }
-  #question { font-size: 20px; font-weight: 600; color: #1f2937; margin-bottom: 20px; }
-.options { display: flex; flex-direction: column; gap: 12px; }
-.option-btn { background: #f3f4f6; border: 2px solid #e5e7eb; padding: 14px; border-radius: 12px; text-align: left; font-size: 16px; cursor: pointer; transition: 0.3s; }
-.option-btn:hover { background: #ede9fe; border-color: #8b5cf6; }
-.option-btn.correct { background: #d1fae5; border-color: #10b981; }
-.option-btn.wrong { background: #fee2e2; border-color: #ef4444; }
-.option-btn:disabled { cursor: not-allowed; }
-.footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-  #next-btn { background: #7c3aed; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 16px; cursor: pointer; display: none; }
-  #next-btn:hover { background: #5b21b6; }
-  #progress { color: #6b7280; font-weight: 500; }
-.result-container { text-align: center; display: none; }
-.result-container h2 { color: #5b21b6; font-size: 32px; margin-bottom: 10px; }
-.result-container p { font-size: 18px; color: #374151; margin-bottom: 20px; }
-  #restart-btn { background: #7c3aed; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 16px; cursor: pointer; }
-</style>
-</head>
-<body>
+<body>   
 <div class="quiz-container">
-  <div class="header"><h1>Syntecxhub Quiz</h1><p>Test Your Front-End Knowledge</p></div>
-  <div id="quiz"><div id="progress"></div><h3 id="question"></h3><div class="options" id="options"></div><div class="footer"><button id="next-btn">Next</button></div></div>
-  <div class="result-container" id="result"><h2>🎉 Quiz Completed!</h2><p id="score-text"></p><button id="restart-btn">Restart Quiz</button></div>
+  <div class="header">
+    <h1>Syntecxhub Quiz</h1>
+    <p>Test Your Front-End Knowledge</p>
+  </div>
+
+  <div id="quiz">
+    <div id="progress"></div>
+    <h3 id="question"></h3>
+    <div class="options" id="options"></div>
+    <div class="footer">
+      <button id="next-btn">Next</button>
+    </div>
+  </div>
+
+  <div class="result-container" id="result">
+    <h2>🎉 Quiz Completed!</h2>
+    <p id="score-text"></p>
+    <button id="restart-btn">Restart Quiz</button>
+  </div>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-const questions = [{question:"HTML stands for?",options:["Hyper Text Markup Language","High Tech Modern Language","Hyper Transfer Markup Language","None"],answer:"Hyper Text Markup Language"},{question:"Which CSS property is used to change text color?",options:["font-color","text-color","color","background-color"],answer:"color"},{question:"Which method is used to select an element by ID in JS?",options:["getElementByClass()","querySelectorAll()","getElementById()","getId()"],answer:"getElementById()"},{question:"What does 'flex' do in CSS?",options:["Makes text bold","Creates flexible layout","Adds shadow","Changes font"],answer:"Creates flexible layout"},{question:"Which tag is used for JavaScript?",options:["<script>","<js>","<javascript>","<code>"],answer:"<script>"}];
-let currentQ=0,score=0;const questionEl=document.getElementById("question"),optionsEl=document.getElementById("options"),nextBtn=document.getElementById("next-btn"),progressEl=document.getElementById("progress"),quizEl=document.getElementById("quiz"),resultEl=document.getElementById("result"),scoreText=document.getElementById("score-text"),restartBtn=document.getElementById("restart-btn");
-function loadQuestion(){let q=questions[currentQ];questionEl.innerText=`${currentQ+1}. ${q.question}`;progressEl.innerText=`Question ${currentQ+1} of ${questions.length}`;optionsEl.innerHTML="";q.options.forEach(option=>{const btn=document.createElement("button");btn.innerText=option;btn.classList.add("option-btn");btn.onclick=()=>selectAnswer(btn,q.answer);optionsEl.appendChild(btn);});}
-function selectAnswer(btn,correct){const buttons=document.querySelectorAll(".option-btn");buttons.forEach(b=>{b.disabled=true;if(b.innerText===correct)b.classList.add("correct");});if(btn.innerText!==correct)btn.classList.add("wrong");else score++;nextBtn.style.display="block";}
-nextBtn.onclick=()=>{currentQ++;if(currentQ<questions.length)loadQuestion();else showResult();nextBtn.style.display="none";}
-function showResult(){quizEl.style.display="none";resultEl.style.display="block";scoreText.innerText=`You scored ${score} out of ${questions.length}`;}
-restartBtn.onclick=()=>{currentQ=0;score=0;quizEl.style.display="block";resultEl.style.display="none";loadQuestion();}
-loadQuestion();});
-</script>
 </body>
-                   </html>
+</html>
